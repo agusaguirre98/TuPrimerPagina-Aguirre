@@ -18,3 +18,10 @@ class EstudianteForm(forms.Form):
     apellido = forms.CharField(max_length=100, label='Apellido')
     email = forms.EmailField(label='Email')
     edad = forms.IntegerField(label='Edad')
+
+class ProfesorForm(forms.Form):
+    nombre = forms.CharField(max_length=100, label='Nombre')
+    apellido = forms.CharField(max_length=100, label='Apellido')
+    email = forms.EmailField(label='Email')
+    fecha_contratacion = forms.DateField(
+        widget=forms.SelectDateWidget, label='Fecha de Contratación')

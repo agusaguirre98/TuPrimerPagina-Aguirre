@@ -1,4 +1,4 @@
-# Proyecto Django 83010
+# Proyecto Django Agustin Aguirre
 Proyecto hecho en django, para ejecutar hace falta seguir estos comandos: 
 
 python manage.py makemigrations
