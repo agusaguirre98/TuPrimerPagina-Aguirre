@@ -94,3 +94,7 @@ def crear_profesor(request):
 
     form = ProfesorForm()
     return render(request, 'mi_primer_app/crear-profesor.html', {"form": form})
+
+def listar_profesores(request):
+    profesores = Profesor.objects.all()
+    return render(request, 'mi_primer_app/listar-profesores.html', {"profesores": profesores})
