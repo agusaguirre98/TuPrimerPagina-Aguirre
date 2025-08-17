@@ -1,0 +1,7 @@
+{% extends "padre.html" %}
+{% block content %}
+<h2>Detalles del Curso: {{ curso.nombre }}</h2>
+<p><strong>Descripción:</strong> {{ curso.descripcion }}</p>
+<p><strong>Duración (semanas):</strong> {{ curso.duracion_semanas }}</p>
+<a href="{% url 'listar-cursos' %}">Volver a la lista</a>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "padre.html" %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 40px auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif;">
+    
+    <h2 style="text-align: center; color: #1f2937; margin-top: 0; margin-bottom: 25px; border-bottom: 1px solid #e5e7eb; padding-bottom: 20px;">
+        Perfil de Usuario
+    </h2>
+
+    {% if messages %}
+        <div style="text-align: center; margin-bottom: 20px;">
+            {% for message in messages %}
+                <p style="color: #16a34a; font-weight: bold;">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e5e7eb;">
+        <strong style="display: block; margin-bottom: 8px; color: #6b7280; font-size: 0.9em;">Nombre de usuario:</strong>
+        <span style="font-size: 1.1em; color: #111827;">{{ user.username }}</span>
+    </div>
+
+    <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e5e7eb;">
+        <strong style="display: block; margin-bottom: 8px; color: #6b7280; font-size: 0.9em;">Nombre:</strong>
+        <span style="font-size: 1.1em; color: #111827;">{{ user.first_name }}</span>
+    </div>
+
+    <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #e5e7eb;">
+        <strong style="display: block; margin-bottom: 8px; color: #6b7280; font-size: 0.9em;">Apellido:</strong>
+        <span style="font-size: 1.1em; color: #111827;">{{ user.last_name }}</span>
+    </div>
+
+    <div style="margin-bottom: 30px;">
+        <strong style="display: block; margin-bottom: 8px; color: #6b7280; font-size: 0.9em;">Email:</strong>
+        <span style="font-size: 1.1em; color: #111827;">{{ user.email }}</span>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="{% url 'editar-perfil' %}" style="display: inline-block; background-color: #4f46e5; color: white; padding: 12px 25px; text-decoration: none; border-radius: 8px; font-weight: bold; transition: background-color 0.3s;">
+            Editar Perfil
+        </a>
+    </div>
+</div>
+{% endblock %}

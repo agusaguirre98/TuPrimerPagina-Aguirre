@@ -1,0 +1,7 @@
+{% extends "padre.html" %}
+{% block content %}
+<h2>Detalles de {{ profesor.nombre }} {{ profesor.apellido }}</h2>
+<p><strong>Email:</strong> {{ profesor.email }}</p>
+<p><strong>Fecha de Contratación:</strong> {{ profesor.fecha_contratacion }}</p>
+<a href="{% url 'listar-profesores' %}">Volver a la lista</a>
+{% endblock %}

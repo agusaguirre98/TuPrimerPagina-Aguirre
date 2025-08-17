@@ -2,52 +2,43 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
- <title> 
-    {% block title %}Bienvenido{% endblock title %}
-</title>
-
-  <!-- CDN de Font Awesome para íconos -->
+  <title>{% block title %}Mi Sitio{% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  {% block extra_css %}{% endblock %}
 </head>
-<body style="margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #333;">
+<body style="margin: 0; font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; padding-top: 60px;">
 
-  <!-- Encabezado -->
-  <header style="background-color: #4f46e5; color: white; padding: 20px 40px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <h1 style="margin: 0; font-size: 2.5em;">Mi Sitio Moderno</h1>
-    <p style="margin: 5px 0 0;">Bienvenido a la nueva experiencia digital</p>
-  </header>
+  {% if user.is_authenticated %}
+    <nav style="position: fixed; top: 0; left: 0; width: 100%; background-color: #374151; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000; padding: 0 40px;">
+      <ul style="margin: 0; padding: 0; list-style: none; display: flex; align-items: center; height: 60px;">
+        <li><a href="{% url 'inicio' %}" style="color: white; text-decoration: none; padding: 0 15px; font-weight: bold;">Inicio</a></li>
+        <li><a href="{% url 'listar-estudiantes' %}" style="color: white; text-decoration: none; padding: 0 15px;">Estudiantes</a></li>
+        <li><a href="{% url 'listar-profesores' %}" style="color: white; text-decoration: none; padding: 0 15px;">Profesores</a></li>
+        <li><a href="{% url 'listar-cursos' %}" style="color: white; text-decoration: none; padding: 0 15px;">Cursos</a></li>
+        <li><a href="{% url 'about' %}" style="color: white; text-decoration: none; padding: 0 15px;">About</a></li>
+        
+        <li style="margin-left: auto; display: flex; align-items: center;">
+            {% if user.avatar.imagen %}
+                <img src="{{ user.avatar.imagen.url }}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 15px; object-fit: cover;">
+            {% endif %}
+            <a href="{% url 'perfil' %}" style="color: white; text-decoration: none; padding: 8px 15px; background-color: #6b7280; border-radius: 8px; margin-right: 15px;">
+              Mi Perfil
+            </a>
+            <a href="{% url 'logout' %}" style="color: white; text-decoration: none; padding: 8px 15px; background-color: #4f46e5; border-radius: 8px;">
+              Cerrar Sesión
+            </a>
+        </li>
+      </ul>
+    </nav>
+  {% endif %}
 
-  <!-- Contenido principal -->
-  <main style="padding: 60px 20px; text-align: center;">
+  <main>
     {% block content %}
-   
-    <h2 style="font-size: 2em; color: #1f2937;">¡Hola! Gracias por visitarnos</h2>
-    <p style="max-width: 600px; margin: 20px auto; font-size: 1.1em; line-height: 1.6;">
-      Este es un sitio diseñado con un enfoque moderno y limpio. Queremos brindarte la mejor experiencia posible. Explora, descubre y disfrutá.
-    </p>
-    <a href="#explorar" style="display: inline-block; margin-top: 30px; background-color: #4f46e5; color: white; padding: 14px 28px; text-decoration: none; font-size: 1em; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: background-color 0.3s;">
-      Explorar ahora
-    </a>
-     {% endblock %}
+    {% endblock %}
   </main>
 
-  <!-- Pie de página con redes sociales -->
-  <footer style="background-color: #e5e7eb; padding: 30px 20px; text-align: center; font-size: 0.9em; color: #6b7280;">
-    <div style="margin-bottom: 10px;">
-      <a href="https://facebook.com" target="_blank" style="margin: 0 10px; color: #3b5998; text-decoration: none; font-size: 1.5em;">
-        <i class="fab fa-facebook"></i>
-      </a>
-      <a href="https://twitter.com" target="_blank" style="margin: 0 10px; color: #1da1f2; text-decoration: none; font-size: 1.5em;">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="https://instagram.com" target="_blank" style="margin: 0 10px; color: #e1306c; text-decoration: none; font-size: 1.5em;">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://linkedin.com" target="_blank" style="margin: 0 10px; color: #0077b5; text-decoration: none; font-size: 1.5em;">
-        <i class="fab fa-linkedin"></i>
-      </a>
-    </div>
-    &copy; 2025 Mi Sitio Moderno. Todos los derechos reservados.
+  <footer style="background-color: #e5e7eb; padding: 30px 20px; text-align: center; font-size: 0.9em; color: #6b7280; margin-top: 60px;">
+    {% comment %} ... Contenido de tu footer ... {% endcomment %}
   </footer>
 
 </body>

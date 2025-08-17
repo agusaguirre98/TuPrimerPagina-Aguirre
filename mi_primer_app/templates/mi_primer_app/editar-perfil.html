@@ -1,0 +1,86 @@
+{% extends "padre.html" %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 40px auto; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif;">
+    
+    <h2 style="text-align: center; color: #1f2937; margin-top: 0; margin-bottom: 25px; border-bottom: 1px solid #e5e7eb; padding-bottom: 20px;">
+        Editar Perfil
+    </h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <h4>Datos Personales</h4>
+        
+        <div style="margin-bottom: 20px;">
+            <label for="{{ form.first_name.id_for_label }}" style="display: block; margin-bottom: 8px; color: #6b7280; font-size: 0.9em;">Nombre:</label>
+            {{ form.first_name }}
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label for="{{ form.last_name.id_for_label }}" style="display: block; margin-bottom: 8px; color: #6b7280; font-size: 0.9em;">Apellido:</label>
+            {{ form.last_name }}
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label for="{{ form.email.id_for_label }}" style="display: block; margin-bottom: 8px; color: #6b7280; font-size: 0.9em;">Email:</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div style="color: #dc2626; font-size: 0.8em; margin-top: 5px;">
+                    {% for error in form.email.errors %}{{ error }}{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
+
+        <h4>Avatar</h4>
+        
+        {% if user.avatar.imagen %}
+            <div style="margin-bottom: 15px; text-align: center;">
+                <p style="margin-bottom: 10px; color: #6b7280; font-size: 0.9em;">Avatar Actual:</p>
+                <img src="{{ user.avatar.imagen.url }}" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+            </div>
+        {% endif %}
+
+        <div style="margin-bottom: 20px;">
+            <label for="{{ avatar_form.imagen.id_for_label }}" style="display: block; margin-bottom: 8px; color: #6b7280; font-size: 0.9em;">Cambiar imagen:</label>
+            {{ avatar_form.imagen }}
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <button type="submit" style="background-color: #4f46e5; color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1em; transition: background-color 0.3s;">
+                Guardar Cambios
+            </button>
+            <a href="{% url 'perfil' %}" style="display: inline-block; margin-left: 15px; color: #6b7280; text-decoration: none;">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Estilos para los campos del formulario */
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 1em;
+        box-sizing: border-box; /* Importante para que el padding no afecte el ancho total */
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="email"]:focus,
+    form input[type="file"]:focus {
+        outline: none;
+        border-color: #4f46e5;
+        box-shadow: 0 0 0 3px #4f46e530;
+    }
+</style>
+{% endblock %}

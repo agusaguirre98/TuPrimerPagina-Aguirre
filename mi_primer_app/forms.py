@@ -1,27 +1,41 @@
 from django import forms
+from .models import Estudiante, Profesor, Avatar, Curso
+from django.contrib.auth.forms import UserCreationForm  , UserChangeForm
+from django.contrib.auth.models import User
+
+class UserEditForm(UserChangeForm):
+    # Limpiamos los campos de contraseña del formulario base
+    password = None 
+    class Meta:
+        model = User
+        # Definimos explícitamente los campos que queremos en el formulario
+        fields = ['first_name', 'last_name', 'email']
+        labels = {
+            'first_name': 'Nombre',
+            'last_name': 'Apellido',
+            'email': 'Email',
+        }
+
+class CursoForm(forms.ModelForm):
+    class Meta:
+        model = Curso
+        fields = '__all__'
 
 
-class CursoForm(forms.Form):
-    nombre = forms.CharField(max_length=100, label='Nombre del Curso')
-    descripcion = forms.CharField(widget=forms.Textarea, label='Descripción')
-    duracion_semanas = forms.IntegerField(label='Duración (semanas)')
-    fecha_inicio = forms.DateField(
-        widget=forms.SelectDateWidget, label='Fecha de Inicio')
-    fecha_fin = forms.DateField(
-        widget=forms.SelectDateWidget, label='Fecha de Fin')
-    activo = forms.BooleanField(
-        required=False, initial=True, label='Activo')  # Campo opcional
+class EstudianteForm(forms.ModelForm):
+    class Meta:
+        model = Estudiante
+        fields = '__all__'
 
-
-class EstudianteForm(forms.Form):
-    nombre = forms.CharField(max_length=100, label='Nombre')
-    apellido = forms.CharField(max_length=100, label='Apellido')
-    email = forms.EmailField(label='Email')
-    edad = forms.IntegerField(label='Edad')
-
-class ProfesorForm(forms.Form):
-    nombre = forms.CharField(max_length=100, label='Nombre')
-    apellido = forms.CharField(max_length=100, label='Apellido')
-    email = forms.EmailField(label='Email')
+class ProfesorForm(forms.ModelForm):
+    class Meta:
+        model = Profesor
+        fields = '__all__'
     fecha_contratacion = forms.DateField(
         widget=forms.SelectDateWidget, label='Fecha de Contratación')
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        # Cambiamos esto para que solo pida la imagen
+        fields = ['imagen']
